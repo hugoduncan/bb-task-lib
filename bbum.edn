@@ -1,0 +1,9 @@
+{:lib hugoduncan/bb-task-lib
+
+ :tasks
+ {:ref-report
+  {:doc   "Report public fns used only by tests and fns that could be private (requires clojure-lsp)"
+   :files ["src/hugoduncan/bb_task_lib/ref_report.clj"]
+   :task  {:doc      "Report public fns used only by tests and fns that could be private"
+           :requires ([hugoduncan.bb-task-lib.ref-report :as ref-report])
+           :task     (ref-report/run)}}}}
