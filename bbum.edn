@@ -6,4 +6,11 @@
    :files ["src/hugoduncan/bb_task_lib/ref_report.clj"]
    :task  {:doc      "Report public fns used only by tests and fns that could be private"
            :requires ([hugoduncan.bb-task-lib.ref-report :as ref-report])
-           :task     (ref-report/run)}}}}
+           :task     (ref-report/run)}}
+
+  :file-lengths
+  {:doc   "Fail when any source file exceeds 800 lines (configurable). Args: [--max-lines N] [path ...]"
+   :files ["src/hugoduncan/bb_task_lib/file_lengths.clj"]
+   :task  {:doc      "Fail when any source file exceeds 800 lines (configurable)"
+           :requires ([hugoduncan.bb-task-lib.file-lengths :as file-lengths])
+           :task     (file-lengths/run)}}}}
