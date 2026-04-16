@@ -1,0 +1,1 @@
+../../../../psi/psi-main/extensions/src/extensions/commit_checks.clj
