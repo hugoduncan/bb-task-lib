@@ -12,5 +12,10 @@
   {:doc
    "Report public fns used only by tests and fns that could be private",
    :requires ([hugoduncan.bb-task-lib.ref-report :as ref-report]),
-   :task (ref-report/run)}},
+   :task (ref-report/run)},
+  cljfmt
+  {:doc
+   "Check or fix Clojure formatting with cljfmt (defaults to check on src/ + test/)",
+   :requires ([hugoduncan.bb-task-lib.cljfmt :as cljfmt]),
+   :task (cljfmt/run)}},
  :paths [".bbum/lib"]}
