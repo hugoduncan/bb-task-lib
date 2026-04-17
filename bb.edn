@@ -1,0 +1,16 @@
+{:tasks
+ {clj-kondo
+  {:doc
+   "Lint with clj-kondo (defaults to src/ + test/; use --copy-configs to seed .clj-kondo/ from deps)",
+   :requires ([hugoduncan.bb-task-lib.clj-kondo :as clj-kondo]),
+   :task (clj-kondo/run)},
+  file-lengths
+  {:doc "Fail when any source file exceeds 800 lines (configurable)",
+   :requires ([hugoduncan.bb-task-lib.file-lengths :as file-lengths]),
+   :task (file-lengths/run)},
+  ref-report
+  {:doc
+   "Report public fns used only by tests and fns that could be private",
+   :requires ([hugoduncan.bb-task-lib.ref-report :as ref-report]),
+   :task (ref-report/run)}},
+ :paths [".bbum/lib"]}
