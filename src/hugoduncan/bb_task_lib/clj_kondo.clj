@@ -21,7 +21,8 @@
   Init mode (copies exported configs from deps, does not lint project sources):
     --copy-configs     Copy configs from classpath dependencies
     --classpath CP     Classpath for --copy-configs (default: clojure -Spath)"
-  (:require [babashka.process :as proc]
+  (:require [babashka.fs      :as fs]
+            [babashka.process :as proc]
             [clojure.string   :as str]))
 
 (defn- parse-opts [args]
@@ -104,7 +105,7 @@
                   "--copy-configs" "--dependencies" "--skip-lint"
                   "--lint" cp]]
         (System/exit (:exit (apply proc/shell {:continue true} argv))))
-      (let [paths (lint-paths opts)]
+      (let [paths (filterv #(fs/exists? %) (lint-paths opts))]
         (when (empty? paths)
           (println "No paths to lint.")
           (System/exit 0))
