@@ -20,4 +20,11 @@
    :files ["src/hugoduncan/bb_task_lib/clj_kondo.clj"]
    :task  {:doc      "Lint with clj-kondo (defaults to src/ + test/; use --copy-configs to seed .clj-kondo/ from deps)"
            :requires ([hugoduncan.bb-task-lib.clj-kondo :as clj-kondo])
-           :task     (clj-kondo/run)}}}}
+           :task     (clj-kondo/run)}}
+
+  :cljfmt
+  {:doc   "Check or fix formatting with cljfmt. Args: [check|fix] [--src] [--test] [--parallel] [--config FILE] [paths...]"
+   :files ["src/hugoduncan/bb_task_lib/cljfmt.clj"]
+   :task  {:doc      "Check or fix Clojure formatting with cljfmt (defaults to check on src/ + test/)"
+           :requires ([hugoduncan.bb-task-lib.cljfmt :as cljfmt])
+           :task     (cljfmt/run)}}}}
