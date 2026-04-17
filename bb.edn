@@ -17,5 +17,10 @@
   {:doc
    "Check or fix Clojure formatting with cljfmt (defaults to check on src/ + test/)",
    :requires ([hugoduncan.bb-task-lib.cljfmt :as cljfmt]),
-   :task (cljfmt/run)}},
+   :task (cljfmt/run)},
+  gordian
+  {:doc
+   "Analyze codebase architecture with gordian; all args passed through (run with --help for full usage)",
+   :requires ([hugoduncan.bb-task-lib.gordian :as gordian]),
+   :task (gordian/run)}},
  :paths [".bbum/lib"]}

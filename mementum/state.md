@@ -20,9 +20,17 @@ Branch `add-tasks` — adding new babashka tasks to `hugoduncan/bb-task-lib`.
 ```
 
 ## Status
-`:cljfmt` task added and registered.
+`:gordian` task added and registered.
 
 ## Completed Tasks
+- `:gordian` — `src/hugoduncan/bb_task_lib/gordian.clj`
+  - **Pure passthrough** — all args forwarded directly to gordian CLI
+  - Auto-installs gordian via `bbin install io.github.hugoduncan/gordian` if not on PATH
+  - Post-install fallback: resolves exe via `bbin bin` dir (PATH is fixed at process start)
+  - Uses `proc/exec` (replaces process) — gordian's exit code propagates directly; critical for `gate` CI command
+  - `bbin` assumed installed; task only ensures _gordian_ is present
+
+
 - `:clj-kondo` — `src/hugoduncan/bb_task_lib/clj_kondo.clj`
   - Default: lints `src/` + `test/` with `--repro`
   - `--src` / `--test` flags restrict scope; `--src-paths` / `--test-paths` override dirs
