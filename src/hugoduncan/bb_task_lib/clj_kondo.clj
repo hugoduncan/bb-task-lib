@@ -13,8 +13,6 @@
   Lint options:
     --src              Lint source paths only
     --test             Lint test paths only
-    --src-paths PATH   Source path(s), repeatable (default: src)
-    --test-paths PATH  Test path(s), repeatable (default: test)
     --parallel         Lint sources in parallel
     --fail-level LEVEL Minimum severity for non-zero exit: warning|error
 
@@ -29,8 +27,6 @@
   (loop [args          args
          src?          false
          test?         false
-         src-paths     nil
-         test-paths    nil
          parallel?     false
          fail-level    nil
          copy-configs? false
@@ -39,43 +35,31 @@
     (if-let [arg (first args)]
       (cond
         (= arg "--src")
-        (recur (next args) true test? src-paths test-paths parallel? fail-level copy-configs? classpath paths)
+        (recur (next args) true test? parallel? fail-level copy-configs? classpath paths)
 
         (= arg "--test")
-        (recur (next args) src? true src-paths test-paths parallel? fail-level copy-configs? classpath paths)
-
-        (= arg "--src-paths")
-        (if-let [v (second args)]
-          (recur (nnext args) src? test? (conj (or src-paths []) v) test-paths parallel? fail-level copy-configs? classpath paths)
-          (throw (ex-info "--src-paths requires an argument" {:args args})))
-
-        (= arg "--test-paths")
-        (if-let [v (second args)]
-          (recur (nnext args) src? test? src-paths (conj (or test-paths []) v) parallel? fail-level copy-configs? classpath paths)
-          (throw (ex-info "--test-paths requires an argument" {:args args})))
+        (recur (next args) src? true parallel? fail-level copy-configs? classpath paths)
 
         (= arg "--parallel")
-        (recur (next args) src? test? src-paths test-paths true fail-level copy-configs? classpath paths)
+        (recur (next args) src? test? true fail-level copy-configs? classpath paths)
 
         (= arg "--fail-level")
         (if-let [v (second args)]
-          (recur (nnext args) src? test? src-paths test-paths parallel? v copy-configs? classpath paths)
+          (recur (nnext args) src? test? parallel? v copy-configs? classpath paths)
           (throw (ex-info "--fail-level requires an argument" {:args args})))
 
         (= arg "--copy-configs")
-        (recur (next args) src? test? src-paths test-paths parallel? fail-level true classpath paths)
+        (recur (next args) src? test? parallel? fail-level true classpath paths)
 
         (= arg "--classpath")
         (if-let [v (second args)]
-          (recur (nnext args) src? test? src-paths test-paths parallel? fail-level copy-configs? v paths)
+          (recur (nnext args) src? test? parallel? fail-level copy-configs? v paths)
           (throw (ex-info "--classpath requires an argument" {:args args})))
 
         :else
-        (recur (next args) src? test? src-paths test-paths parallel? fail-level copy-configs? classpath (conj paths arg)))
+        (recur (next args) src? test? parallel? fail-level copy-configs? classpath (conj paths arg)))
       {:src?          src?
        :test?         test?
-       :src-paths     (or src-paths ["src"])
-       :test-paths    (or test-paths ["test"])
        :parallel?     parallel?
        :fail-level    fail-level
        :copy-configs? copy-configs?
@@ -88,13 +72,13 @@
       (throw (ex-info "Failed to derive classpath via clojure -Spath" {:err err})))
     (str/trim out)))
 
-(defn- lint-paths [{:keys [src? test? src-paths test-paths paths]}]
+(defn- lint-paths [{:keys [src? test? paths]}]
   (cond
     (seq paths)      paths
-    (and src? test?) (concat src-paths test-paths)
-    src?             src-paths
-    test?            test-paths
-    :else            (concat src-paths test-paths)))
+    (and src? test?) ["src" "test"]
+    src?             ["src"]
+    test?            ["test"]
+    :else            ["src" "test"]))
 
 (defn run []
   (let [{:keys [parallel? fail-level copy-configs? classpath] :as opts}
