@@ -20,7 +20,7 @@ Branch `add-tasks` — adding new babashka tasks to `hugoduncan/bb-task-lib`.
 ```
 
 ## Status
-`:clj-kondo` task added and registered.
+`:cljfmt` task added and registered.
 
 ## Completed Tasks
 - `:clj-kondo` — `src/hugoduncan/bb_task_lib/clj_kondo.clj`
@@ -30,3 +30,12 @@ Branch `add-tasks` — adding new babashka tasks to `hugoduncan/bb-task-lib`.
   - `--parallel`, `--fail-level` forwarded to clj-kondo
   - `--copy-configs [--classpath CP]` → init mode (`--skip-lint`); derives CP via `clojure -Spath` if not given
   - Exit code propagated from clj-kondo
+
+- `:cljfmt` — `src/hugoduncan/bb_task_lib/cljfmt.clj`
+  - Default subcommand: `check` (non-destructive); `fix` requires explicit intent
+  - Default paths: `src/` + `test/`, filtered with `fs/exists?`
+  - `--src` / `--test` restrict to one default set; positional args override entirely
+  - No `--src-paths`/`--test-paths` — positional args cover that case (simpler API)
+  - `--parallel`, `--config FILE` forwarded to cljfmt
+  - First non-flag arg consumed as subcommand if it is `check` or `fix`; otherwise treated as a path
+  - Exit code propagated from cljfmt
