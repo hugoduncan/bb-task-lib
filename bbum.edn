@@ -13,4 +13,11 @@
    :files ["src/hugoduncan/bb_task_lib/file_lengths.clj"]
    :task  {:doc      "Fail when any source file exceeds 800 lines (configurable)"
            :requires ([hugoduncan.bb-task-lib.file-lengths :as file-lengths])
-           :task     (file-lengths/run)}}}}
+           :task     (file-lengths/run)}}
+
+  :clj-kondo
+  {:doc   "Lint with clj-kondo. Args: [--src] [--test] [--src-paths P] [--test-paths P] [--parallel] [--fail-level LEVEL] [--copy-configs [--classpath CP]] [paths...]"
+   :files ["src/hugoduncan/bb_task_lib/clj_kondo.clj"]
+   :task  {:doc      "Lint with clj-kondo (defaults to src/ + test/; use --copy-configs to seed .clj-kondo/ from deps)"
+           :requires ([hugoduncan.bb-task-lib.clj-kondo :as clj-kondo])
+           :task     (clj-kondo/run)}}}}
