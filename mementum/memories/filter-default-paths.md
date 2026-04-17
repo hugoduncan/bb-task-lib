@@ -1,0 +1,1 @@
+🔁 Tasks with default paths (`src`, `test`) must filter with `fs/exists?` before invoking external tools. Missing dirs cause tool errors, not graceful skips. Pattern: `(filterv #(fs/exists? %) paths)` before exec, exit 0 with message if nothing remains. Seen in both `file-lengths` and `clj-kondo`.
