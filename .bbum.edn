@@ -1,30 +1,72 @@
-{:sources {},
+{:sources
+ {:bbum-marketplace
+  #:git{:url "https://github.com/hugoduncan/bbum-marketplace",
+        :branch "master"}},
  :tasks
- {:clj-kondo
-  {:source :bb-tasks-lib,
-   :lib hugoduncan/bb-task-lib,
+ {:marketplace:star
+  {:source :bbum-marketplace,
+   :lib hugoduncan/bbum-marketplace,
    :install :explicit,
    :lock
-   #:local{:path
-           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"}},
+   #:git{:url "https://github.com/hugoduncan/bbum-marketplace",
+         :sha "0c0b62713d61afd0609ecd9835000863a4b2ade9"}},
+  :marketplace:info
+  {:source :bbum-marketplace,
+   :lib hugoduncan/bbum-marketplace,
+   :install :explicit,
+   :lock
+   #:git{:url "https://github.com/hugoduncan/bbum-marketplace",
+         :sha "0c0b62713d61afd0609ecd9835000863a4b2ade9"}},
   :file-lengths
   {:source :bb-tasks-lib,
    :lib hugoduncan/bb-task-lib,
    :install :explicit,
    :lock
    #:local{:path
-           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"}},
+           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"},
+   :required-by []},
+  :marketplace:publish
+  {:source :bbum-marketplace,
+   :lib hugoduncan/bbum-marketplace,
+   :install :explicit,
+   :lock
+   #:git{:url "https://github.com/hugoduncan/bbum-marketplace",
+         :sha "0c0b62713d61afd0609ecd9835000863a4b2ade9"}},
   :ref-report
   {:source :bb-tasks-lib,
    :lib hugoduncan/bb-task-lib,
    :install :explicit,
    :lock
    #:local{:path
-           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"}},
+           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"},
+   :required-by []},
+  :marketplace:search
+  {:source :bbum-marketplace,
+   :lib hugoduncan/bbum-marketplace,
+   :install :explicit,
+   :lock
+   #:git{:url "https://github.com/hugoduncan/bbum-marketplace",
+         :sha "0c0b62713d61afd0609ecd9835000863a4b2ade9"}},
+  :marketplace:list
+  {:source :bbum-marketplace,
+   :lib hugoduncan/bbum-marketplace,
+   :install :explicit,
+   :lock
+   #:git{:url "https://github.com/hugoduncan/bbum-marketplace",
+         :sha "0c0b62713d61afd0609ecd9835000863a4b2ade9"}},
+  :clj-kondo
+  {:source :bb-tasks-lib,
+   :lib hugoduncan/bb-task-lib,
+   :install :explicit,
+   :lock
+   #:local{:path
+           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"},
+   :required-by []},
   :cljfmt
   {:source :bb-tasks-lib,
    :lib hugoduncan/bb-task-lib,
    :install :explicit,
    :lock
    #:local{:path
-           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"}}}}
+           "/Users/duncan/projects/hugoduncan/bb-task-lib/add-tasks"},
+   :required-by []}}}

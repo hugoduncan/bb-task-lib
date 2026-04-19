@@ -1,26 +1,47 @@
 {:tasks
- {clj-kondo
+ {
+  clj-kondo
   {:doc
    "Lint with clj-kondo (defaults to src/ + test/; use --copy-configs to seed .clj-kondo/ from deps)",
    :requires ([hugoduncan.bb-task-lib.clj-kondo :as clj-kondo]),
-   :task (clj-kondo/run)},
-  file-lengths
-  {:doc "Fail when any source file exceeds 800 lines (configurable)",
-   :requires ([hugoduncan.bb-task-lib.file-lengths :as file-lengths]),
-   :task (file-lengths/run)},
-  ref-report
-  {:doc
-   "Report public fns used only by tests and fns that could be private",
-   :requires ([hugoduncan.bb-task-lib.ref-report :as ref-report]),
-   :task (ref-report/run)},
+   :task (clj-kondo/run)}
   cljfmt
   {:doc
    "Check or fix Clojure formatting with cljfmt (defaults to check on src/ + test/)",
    :requires ([hugoduncan.bb-task-lib.cljfmt :as cljfmt]),
-   :task (cljfmt/run)},
+   :task (cljfmt/run)}
+  file-lengths
+  {:doc "Fail when any source file exceeds 800 lines (configurable)",
+   :requires ([hugoduncan.bb-task-lib.file-lengths :as file-lengths]),
+   :task (file-lengths/run)}
   gordian
   {:doc
    "Analyze codebase architecture with gordian; all args passed through (run with --help for full usage)",
    :requires ([hugoduncan.bb-task-lib.gordian :as gordian]),
-   :task (gordian/run)}},
+   :task (gordian/run)}
+  marketplace:info
+  {:doc "Show library detail: bb marketplace:info <lib>",
+   :requires ([bbum-marketplace.info :as mp-info]),
+   :task (mp-info/run)}
+  marketplace:list
+  {:doc "List bbum task libraries [--sort stars|name|added] [--tag TAG]",
+   :requires ([bbum-marketplace.list :as mp-list]),
+   :task (mp-list/run)}
+  marketplace:publish
+  {:doc "Publish this library to the bbum marketplace",
+   :requires ([bbum-marketplace.publish :as mp-pub]),
+   :task (mp-pub/run)}
+  marketplace:search
+  {:doc "Search bbum task libraries: bb marketplace:search <query>",
+   :requires ([bbum-marketplace.search :as mp-search]),
+   :task (mp-search/run)}
+  marketplace:star
+  {:doc "Star a library: bb marketplace:star <lib>",
+   :requires ([bbum-marketplace.star :as mp-star]),
+   :task (mp-star/run)}
+  ref-report
+  {:doc
+   "Report public fns used only by tests and fns that could be private",
+   :requires ([hugoduncan.bb-task-lib.ref-report :as ref-report]),
+   :task (ref-report/run)}},
  :paths [".bbum/lib"]}
