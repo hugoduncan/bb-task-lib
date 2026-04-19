@@ -20,7 +20,9 @@ Branch `add-tasks` — adding new babashka tasks to `hugoduncan/bb-task-lib`.
 ```
 
 ## Status
-`:gordian` task added and registered.
+`:gordian`, `:clj-kondo`, `:cljfmt` tasks added and registered.
+`bbum` itself updated: `z-splice-tasks` now inserts tasks in alphabetical order (or grouped by prefix).
+The bbum commit is in `/Users/duncan/projects/hugoduncan/bbum/bbum-master` on branch `bbum-master`.
 
 ## Completed Tasks
 - `:gordian` — `src/hugoduncan/bb_task_lib/gordian.clj`
